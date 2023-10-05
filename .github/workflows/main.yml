@@ -31,3 +31,4 @@ jobs:
             --handler index.handler \
             --role arn:aws:iam::674024469050:role/lambda-cloudformation \
             --zip-file fileb://deploy.zip
+
