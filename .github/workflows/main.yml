@@ -1,9 +1,9 @@
-name: Deploy
+name: Deploy to Lambda
 
 on:
   push:
     branches:
-    - main
+      - main
 
 jobs:
   deploy_lambda:
@@ -15,24 +15,19 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '14' # Use the version supported by AWS Lambda
 
-      - name: Install NPM dependencies and build
-        env:
-          CI: true
+      - name: Install dependencies and build
         run: |
           npm install
-          npm install -g @zeit/ncc # Install ncc globally
-          ncc build index.js
-          zip -j deploy.zip ./dist/*
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-south-1
+          npm prune --production
+          zip -r deploy.zip ./*
 
       - name: Deploy Lambda Function
         run: |
-          aws lambda update-function-code --function-name=dev-MyLambdaFunction --zip-file=fileb://deploy.zip
+          aws lambda create-function \
+            --function-name dev-MyLambdaFunction \
+            --runtime nodejs14.x \
+            --handler index.handler \
+            --role arn:aws:iam::674024469050:role/lambda-cloudformation \
+            --zip-file fileb://deploy.zip
