@@ -4,7 +4,7 @@
   "description": "A simple Lambda function",
   "main": "index.js",
   "dependencies": {
-    "image-size": "^0.10.0"
+    "image-size": "0.10.1"
   },
   "devDependencies": {},
   "scripts": {
