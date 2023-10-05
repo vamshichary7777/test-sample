@@ -25,10 +25,7 @@ jobs:
 
       - name: Deploy Lambda Function
         run: |
-          aws lambda create-function \
+          aws lambda update-function-code \
             --function-name dev-MyLambdaFunction \
-            --runtime nodejs14.x \
-            --handler index.handler \
-            --role arn:aws:iam::674024469050:role/lambda-cloudformation \
             --zip-file fileb://deploy.zip
 
