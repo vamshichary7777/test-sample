@@ -1,11 +1,11 @@
 {
-  "name": "lambda-express-app",
+  "name": "lambda-hello-world",
   "version": "1.0.0",
-  "description": "Node.js application for AWS Lambda",
+  "description": "A simple Lambda function",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
   "scripts": {
-    "start": "node index.js"
-  },
-  "dependencies": {
-    "express": "^4.17.1"
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
