@@ -1,11 +1,16 @@
-const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.get('/', (req, res) => {
-    res.send('Hello, World!');
-});
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+exports.handler = async (event) => {
+  try {
+    const response = {
+      statusCode: 200,
+      body: JSON.stringify('Hello,Welcome to averisana!'),
+    };
+    return response;
+  } catch (error) {
+    console.error('Error:', error);
+    const response = {
+      statusCode: 500,
+      body: JSON.stringify('An error occurred'),
+    };
+    return response;
+  }
+};
